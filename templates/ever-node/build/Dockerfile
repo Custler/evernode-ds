@@ -1,6 +1,6 @@
-ARG RUST_VERSION=1.65.0
+ARG RUST_VERSION=1.70.0
 
-FROM ubuntu:18.04 as build
+FROM ubuntu:22.04 as build
 
 ARG RUST_VERSION
 
@@ -40,17 +40,16 @@ RUN curl https://packages.confluent.io/deb/5.5/archive.key | apt-key add;\
     apt-get update;\
     apt-get install -y librdkafka-dev;
 
-# Get Rust
-COPY rust_install.sh /tmp/rust_install.sh
-RUN bash -c "/tmp/rust_install.sh ${RUST_VERSION}"
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain ${RUST_VERSION} -y
 
 WORKDIR /tonlabs/ever-node
-RUN cargo update && cargo build --release --features "external_db,metrics"
+RUN cargo update && cargo build --release --features "external_db,statsd"
 
 WORKDIR /tonlabs/ton-labs-node-tools
 RUN cargo update && cargo build --release
 
-FROM ubuntu:18.04 as build2
+FROM ubuntu:22.04 as build2
 
 ARG RUST_VERSION
 
@@ -84,11 +83,9 @@ RUN echo "deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ focal main restrict
 
 ENV ZSTD_LIB_DIR=/usr/lib/x86_64-linux-gnu
 
-# Get Rust
-COPY rust_install.sh /tmp/rust_install.sh
-RUN bash -c "/tmp/rust_install.sh ${RUST_VERSION}"
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain ${RUST_VERSION} -y
 
 COPY --from=build /tonlabs/ever-node/target/release/ton_node /ever-node/
 COPY --from=build /tonlabs/ton-labs-node-tools/target/release/console /ever-node/tools/
 COPY --from=build /tonlabs/ton-labs-node-tools/target/release/keygen /ever-node/tools/
-

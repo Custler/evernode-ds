@@ -86,7 +86,7 @@ See [4. Notes](#4-notes)
 
 ### 3.1 Prerequisites
 
--   Host OS: Linux (all scripts tested on Ubuntu 20.04).
+-   Host OS: Linux (all scripts tested on Ubuntu 22.04).
 -   DApp server is accessed via HTTPS, so your server must have a fully qualified domain name.\
     A self-signed certificate will be received on start-up and will be renewed automatically.
 -   Installed Git, Docker Engine, Docker CLI, Docker Compose v2 or later.

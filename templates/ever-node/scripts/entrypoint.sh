@@ -13,7 +13,11 @@ if [ "$1" = "bash" ]; then
     tail -f /dev/null
 else
     cd /ever-node
-    exec /ever-node/ton_node --configs "${CONFIGS_PATH}"
+    Curr_Timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
+    echo -e "\n$Curr_Timestamp" | tee -a ${NODE_LOGS_DIR}/stdout.log ${NODE_LOGS_DIR}/stderr.log > /dev/null
+    export RUST_BACKTRACE=full
+    exec /ever-node/ton_node --configs "${CONFIGS_PATH}" >> ${NODE_LOGS_DIR}/stdout.log \
+        2>>${NODE_LOGS_DIR}/stderr.log
 fi
 
 echo "INFO: ever-node startup... DONE"

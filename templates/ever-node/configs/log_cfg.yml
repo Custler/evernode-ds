@@ -6,7 +6,7 @@ appenders:
   stdout:
     kind: console
     encoder:
-      pattern: "{d(%s.%f)} {l} [{h({t})}] {I}: {m}{n}"
+      pattern: "{d(%Y-%m-%d %H:%M:%S.%f)} {l} [{h({t})}] {I}: {m}{n}"
 
   stdout_ref:
     kind: console
@@ -17,7 +17,7 @@ appenders:
     kind: file
     path: "/ever-node/logs/output.log"
     encoder:
-      pattern: "{d(%s.%f)} {l} [{h({t})}] {I}: {m}{n}"
+      pattern: "{d(%Y-%m-%d %H:%M:%S.%f)} {l} [{h({t})}] {I}: {m}{n}"
 
   tvm_logfile:
     kind: file

@@ -20,8 +20,8 @@ services:
       - ./configs/:/ever-node/configs/
       - ./scripts/:/ever-node/scripts/
       - ./logs/:/ever-node/logs/
-      - DB:/ever-node/node_db/
-      - /tmp/metrics/:/tmp/metrics/
+      - ./node_db:/ever-node/node_db/
+      - ./metrics/:/tmp/metrics/
     entrypoint: /ever-node/scripts/entrypoint.sh
     command: ["bash"]
     mem_limit: {{NODE_MEMORY}}
@@ -35,5 +35,3 @@ services:
 networks:
   {{NETWORK}}:
     external: true
-volumes:
-  DB:
