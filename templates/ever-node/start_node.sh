@@ -12,13 +12,18 @@ cd ../../
 echo "==============================================================================="
 echo "INFO: starting node on {{HOSTNAME}}..."
 
-docker-compose up --build -d
+docker-compose up --build -d --remove-orphans
 docker exec --tty ever-node "/ever-node/scripts/generate_console_config.sh"
 
 docker-compose down -t 300
-sed -i 's/"client_enabled":.*/"client_enabled": true,/' configs/config.json
-sed -i 's/"service_enabled":.*/"service_enabled": true/' configs/config.json
-sed -i 's/command: \["bash"\]/command: ["normal"]/' docker-compose.yml
+
+if [[ "{{NETWORK_TYPE}}" == "net.ton.dev" ]];then
+    yq e -i -o json \
+        '.remp_client.enabled = true | .remp.service_enabled = true' \
+        configs/config.json
+fi
+yq e -i '.services.node.command = ["normal"]' docker-compose.yml
+
 docker-compose up -d
 echo "INFO: starting node on {{HOSTNAME}}... DONE"
 echo "==============================================================================="
