@@ -3,8 +3,8 @@
 #----- To configure your Dapp server set at least these environment variables: -----
 # NETWORK_TYPE - net.ton.dev or net.ton.dev - same name as corresponding github repo for download global config
 export NETWORK_TYPE=net.ton.dev
-export EVERNODE_FQDN=your.domain.org
-export LETSENCRYPT_EMAIL=your@email.org
+export EVERNODE_FQDN=empty4.deploy.tonlabs.io
+export LETSENCRYPT_EMAIL=custmine@gmail.com
 
 #----- Next variables can be used as reasonable defaults: -----
 export ADNL_PORT=30303
