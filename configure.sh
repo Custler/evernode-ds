@@ -33,7 +33,9 @@ export NETWORK=evernode_ds
 export COMPOSE_HTTP_TIMEOUT=120 # TODO: do we really need this?
 
 # Install latest yq
-YQ_LATEST_URL="$(curl -sS -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets[]|select(.name == "yq_linux_amd64")|.browser_download_url')"
+# !!! automaticaly detect latest version has very low rate limit for IP without auth
+# YQ_LATEST_URL="$(curl -sS -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets[]|select(.name == "yq_linux_amd64")|.browser_download_url')"
+YQ_LATEST_URL="https://github.com/mikefarah/yq/releases/download/v4.35.2/yq_linux_amd64"
 sudo wget "$YQ_LATEST_URL" -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
 
 # 
