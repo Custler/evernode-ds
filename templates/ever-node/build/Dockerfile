@@ -16,6 +16,9 @@ COPY ever-node-tools /tonlabs/ton-labs-node-tools/
 # Install dependencies and build
 RUN apt-get update && \
     apt-get install -y \
+    apt-utils \
+    curl \
+    gnupg2 \
     gpg \
     tar \
     cmake \
@@ -55,6 +58,9 @@ ENV ZSTD_LIB_DIR=/usr/lib/x86_64-linux-gnu
 # Install remaining dependencies
 RUN apt-get update && \
     apt-get install -y \
+    apt-utils \
+    curl \
+    gnupg2 \
     librdkafka1 \
     build-essential \
     cmake \
@@ -63,6 +69,7 @@ RUN apt-get update && \
     gdb \
     gpg \
     jq \
+    mc \
     tar \
     vim \
     tcpdump \
