@@ -39,8 +39,8 @@ RUN apt-get update && \
 
 # rdkafka from confluent's repo
 # curl https://packages.confluent.io/deb/5.5/archive.key | apt-key add;
-# wget -qO - https://packages.confluent.io/deb/7.5/archive.key | sudo apt-key add -
-RUN wget -qO - https://packages.confluent.io/deb/7.5/archive.key | sudo apt-key add -; \
+# wget -qO - https://packages.confluent.io/deb/7.5/archive.key | apt-key add -
+RUN wget -qO - https://packages.confluent.io/deb/7.5/archive.key | apt-key add - ; \
     echo "deb [arch=amd64] https://packages.confluent.io/deb/7.5 stable main" >> /etc/apt/sources.list;\
     apt-get update;\
     apt-get install -y librdkafka-dev;
