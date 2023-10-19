@@ -18,6 +18,7 @@ RUN apt-get update && \
     apt-get install -y \
     apt-utils \
     curl \
+    wget \
     gnupg2 \
     gpg \
     tar \
@@ -37,8 +38,10 @@ RUN apt-get update && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain ${RUST_VERSION} -y
 
 # rdkafka from confluent's repo
-RUN curl https://packages.confluent.io/deb/5.5/archive.key | apt-key add;\
-    echo "deb [arch=amd64] https://packages.confluent.io/deb/5.5 stable main" >> /etc/apt/sources.list;\
+# curl https://packages.confluent.io/deb/5.5/archive.key | apt-key add;
+# wget -qO - https://packages.confluent.io/deb/7.5/archive.key | sudo apt-key add -
+RUN wget -qO - https://packages.confluent.io/deb/7.5/archive.key | sudo apt-key add -; \
+    echo "deb [arch=amd64] https://packages.confluent.io/deb/7.5 stable main" >> /etc/apt/sources.list;\
     apt-get update;\
     apt-get install -y librdkafka-dev;
 
@@ -60,6 +63,7 @@ RUN apt-get update && \
     apt-get install -y \
     apt-utils \
     curl \
+    wget \
     gnupg2 \
     librdkafka1 \
     build-essential \
