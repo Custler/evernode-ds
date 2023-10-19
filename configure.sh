@@ -5,7 +5,6 @@
 export NETWORK_TYPE=net.ton.dev
 export EVERNODE_FQDN=your.domain.org
 export LETSENCRYPT_EMAIL=your@email.org
-export VALIDATOR_NAME=my_validator
 
 #----- Next variables can be used as reasonable defaults: -----
 export ADNL_PORT=30303

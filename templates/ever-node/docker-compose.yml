@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     environment:
       - ADNL_PORT={{ADNL_PORT}}
-      - VALIDATOR_NAME={{VALIDATOR_NAME}}
       - NETWORK_TYPE={{NETWORK_TYPE}}
       - CONFIGS_PATH=/ever-node/configs
+      - NODE_LOGS_DIR=/ever-node/logs
       - STATSD_DOMAIN=statsd
       - STATSD_PORT=:9125  # here ":" is not a typo.
     ports:
