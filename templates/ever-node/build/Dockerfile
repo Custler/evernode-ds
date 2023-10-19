@@ -15,6 +15,7 @@ COPY ever-node /tonlabs/ever-node/
 COPY ever-node-tools /tonlabs/ton-labs-node-tools/
 
 # Install dependencies and build
+WORKDIR /tonlabs/ever-node
 RUN apt-get update && \
     apt-get install -y curl gnupg2 build-essential cmake libssl-dev libzstd-dev libgoogle-perftools-dev && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
@@ -22,6 +23,8 @@ RUN apt-get update && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain ${RUST_VERSION} -y && \
     cargo update && \
     cargo build --release --features "external_db,statsd"
+WORKDIR /tonlabs/ton-labs-node-tools
+RUN cargo update && cargo build --release
 
 # Another build stage
 FROM ubuntu:${UBUNTU_VERSION} as build2

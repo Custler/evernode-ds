@@ -20,7 +20,7 @@ export CONNECT_MEMORY=5G
 
 # Node and tools repo and commit id
 export EVERNODE_GITHUB_REPO="https://github.com/tonlabs/ever-node"
-export EVERNODE_GITHUB_COMMIT_ID="72f5a07b725a71f76e6ca3496845f461dd1e6e4b"
+export EVERNODE_GITHUB_COMMIT_ID="f19c7d0964dec1cf2f18e50600babc057f90e22a"
 export EVERNODE_TOOLS_GITHUB_REPO="https://github.com/tonlabs/ever-node-tools.git"
 export EVERNODE_TOOLS_GITHUB_COMMIT_ID="master"
 
